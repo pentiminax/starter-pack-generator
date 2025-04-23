@@ -1,0 +1,50 @@
+<script>
+    document.getElementById('starterPackForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const generateBtn = document.getElementById('generateBtn');
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<div class="spinner"></div>';
+
+        const resultContainer = document.getElementById('resultContainer');
+
+        resultContainer.innerHTML = `
+                <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80">
+                    <div class="text-center">
+                        <div class="spinner mx-auto mb-4"></div>
+                        <p class="text-gray-700 font-medium">Génération en cours...</p>
+                        <p class="text-sm text-gray-500 mt-1">Veuillez patienter pendant que l'IA crée votre starter pack</p>
+                    </div>
+                </div>
+            `;
+return;
+        const response = await fetch('{{ path('app_generate_starter_pack') }}', {
+            body: new FormData(this),
+            method: 'POST',
+        });
+
+        const json = await response.json();
+
+        const img = document.createElement('img');
+
+        const base64 = json['data'][0]['b64_json'];
+
+        img.src = `data:image/png;base64,${base64}`;
+
+        resultContainer.innerHTML = '';
+        resultContainer.appendChild(img);
+
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        downloadBtn.disabled = false;
+        downloadBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+        downloadBtn.addEventListener('click', () => {
+            const base64 = data.data[0].b64_json;
+            const a = document.createElement('a');
+            a.href = `data:image/png;base64,${base64}`;
+            a.download = 'starter-pack.png';
+            a.click();
+        });
+    });
+</script>

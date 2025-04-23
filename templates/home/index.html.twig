@@ -105,6 +105,7 @@
                             <!-- Bouton de génération -->
                             <div class="pt-2">
                                 <button type="submit"
+                                        id="generateBtn"
                                         class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition duration-200 flex items-center justify-center"
                                 >
                                     <i class="fas fa-magic mr-2"></i> Générer mon Starter Pack
@@ -206,59 +207,10 @@
                 </div>
             </div>
             <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400 text-sm">
-                <p>© 2023 Starter Pack IA Generator. Tous droits réservés.</p>
+                <p>© 2025 Starter Pack IA Generator. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        document.getElementById('starterPackForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const resultContainer = document.getElementById('resultContainer');
-            const url = '{{ path('app_generate_starter_pack') }}';
-
-            resultContainer.innerHTML = `
-    <div class="flex items-center justify-center h-full">
-        <svg class="animate-spin h-12 w-12 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"></path>
-        </svg>
-    </div>
-`;
-
-            const response = await fetch(url, {
-                body: new FormData(this),
-                method: 'POST',
-            });
-
-            const json = await response.json();
-
-            const img = document.createElement('img');
-
-            const base64 = json['data'][0]['b64_json'];
-
-            img.src = `data:image/png;base64,${base64}`;
-
-            resultContainer.innerHTML = '';
-            resultContainer.appendChild(img);
-
-            const downloadBtn = document.getElementById('downloadBtn');
-
-            downloadBtn.disabled = false;
-            downloadBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-
-            downloadBtn.addEventListener('click', () => {
-                const base64 = data.data[0].b64_json;
-                const a = document.createElement('a');
-                a.href = `data:image/png;base64,${base64}`;
-                a.download = 'starter-pack.png';
-                a.click();
-            });
-        });
-
-        document.getElementById('downloadBtn').addEventListener('click', function() {
-            alert('Dans une application réelle, cette fonction téléchargerait votre image générée.');
-        });
-    </script>
+    {% include 'home/script.html.twig' %}
 {% endblock %}
