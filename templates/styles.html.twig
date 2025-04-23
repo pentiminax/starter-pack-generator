@@ -39,4 +39,17 @@
         background-repeat: no-repeat;
         background-size: 1.5em 1.5em;
     }
+    .spinner {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: conic-gradient(#0000 10%,#6b73ff);
+        -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+        animation: spin 1s infinite linear;
+    }
+    @keyframes spin {
+        to {
+            transform: rotate(1turn);
+        }
+    }
 </style>
