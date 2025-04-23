@@ -1,0 +1,25 @@
+<script>
+    document.getElementById('starterPackForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const downloadBtn = document.getElementById('downloadBtn');
+        const generateBtn = document.getElementById('generateBtn');
+        const resultContainer = document.getElementById('resultContainer');
+
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<div class="spinner"></div>';
+
+        resultContainer.innerHTML = `
+                <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80">
+                    <div class="text-center">
+                        <div class="spinner mx-auto mb-4"></div>
+                        <p class="text-gray-700 font-medium">Génération en cours...</p>
+                        <p class="text-sm text-gray-500 mt-1">Veuillez patienter pendant que l'IA crée votre starter pack</p>
+                    </div>
+                </div>
+            `;
+
+        downloadBtn.disabled = false;
+        downloadBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    });
+</script>

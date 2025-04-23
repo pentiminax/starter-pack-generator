@@ -211,24 +211,5 @@
         </div>
     </footer>
 
-    <script>
-        document.getElementById('starterPackForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const resultContainer = document.getElementById('resultContainer');
-
-            resultContainer.innerHTML = `
-    <div class="flex items-center justify-center h-full">
-        <svg class="animate-spin h-12 w-12 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"></path>
-        </svg>
-    </div>
-`;
-        });
-
-        document.getElementById('downloadBtn').addEventListener('click', function() {
-            alert('Dans une application réelle, cette fonction téléchargerait votre image générée.');
-        });
-    </script>
+    {% include 'home/script.html.twig' %}
 {% endblock %}
