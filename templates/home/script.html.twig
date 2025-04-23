@@ -17,7 +17,7 @@
                     </div>
                 </div>
             `;
-return;
+
         const response = await fetch('{{ path('app_generate_starter_pack') }}', {
             body: new FormData(this),
             method: 'POST',
